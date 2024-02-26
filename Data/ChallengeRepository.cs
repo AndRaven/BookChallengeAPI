@@ -1,4 +1,5 @@
 //Repository class for working with Challenges and Books    
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookChallengeAPI.Data
@@ -48,15 +49,23 @@ namespace BookChallengeAPI.Data
                 {
                     Id = grouped.Key.Id,
                     Name = grouped.Key.Name,
-                    Books = grouped.Select(combined => combined.Book).Where(book => book != null) as ICollection<Book>
+                    Description = grouped.First().Challenge.Description,
+                    NoOfBooks = grouped.Select(combined => combined.Book!).Count(),
+                    Books = grouped.Select(combined => combined.Book!).Where(book => book != null) as ICollection<Book>
                 }).ToList();
 
             return await Task.FromResult(challengesWithBooks);
         }
 
+        [HttpGet]
         public async Task<Challenge?> GetChallengeByIdAsync(int challengeId)
         {
             return await _context.Challenges.Where(ch => ch.Id == challengeId).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> CheckChallengeExistsAsync(int challengeId)
+        {
+            return await _context.Challenges.Where(ch => ch.Id == challengeId).AnyAsync();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Buffers;
 using AutoMapper;
 using BookChallengeAPI.Data;
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 
 [ApiController]
 [Route("api/challenges")]
@@ -30,12 +31,19 @@ public class ChallengesController : ControllerBase
        return Ok(_mapper.Map<IEnumerable<ChallengeDto>>(challengeEntities));
     }
 
-  // public async Task<ActionResult> GetChallenge(string id)
-  // {
-  //        string message = "Hello from Book Reading Challenge API!";
-       
-  //      return Ok(message);
-  // }
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetChallenge(string id)
+    {
+         if (! await _repository.CheckChallengeExistsAsync(int.Parse(id)))
+         {
+          _logger.LogInformation($"Challenge with id {id} not found");
+           return NotFound();
+         }
+
+         var challenge = await _repository.GetChallengeByIdAsync(int.Parse(id));
+        
+        return Ok(_mapper.Map<ChallengeWithoutBooksDto>(challenge));
+    }
 
   // //add an HTTPPut fucntion for Challenge
   // public async Task<ActionResult> PutChallenge(string id)

@@ -5,6 +5,8 @@ namespace BookChallengeAPI.Data
 
         Task<IEnumerable<Challenge>> GetChallengesAsync();
 
+        Task<bool> CheckChallengeExistsAsync(int challengeId);
+
         Task<Challenge?> GetChallengeByIdAsync(int challengeId);
     }
 }

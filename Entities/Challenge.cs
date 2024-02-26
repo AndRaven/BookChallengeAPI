@@ -15,7 +15,7 @@ public class Challenge
     [MaxLength(1000)]
     public string  Description{ get; set; } = String.Empty;
 
-    public int NoOfBooks { get; set; }
+    public int NoOfBooks { get; set; } 
 
     public int NoOfUsers { get; set; }
 
