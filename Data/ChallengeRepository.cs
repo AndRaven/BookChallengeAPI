@@ -67,6 +67,22 @@ namespace BookChallengeAPI.Data
         {
             return await _context.Challenges.Where(ch => ch.Id == challengeId).AnyAsync();
         }
+
+        public Task<Book?> GetBookByIdAsync(int challengeId, int bookId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Book>> GetBooksForChallengeAsync(int challengeId)
+        {
+            var booksInChallenge =  _context.ChallengeBooks
+                   .Join(_context.Books, chBook => chBook.BookId, book => book.Id, (chBook, book) => new { ChallengeBook = chBook, Book = book })
+                   .OrderBy( combined => combined.Book.Id)
+                   .Select(combined  => combined.Book).ToList();
+
+            return Task.FromResult(booksInChallenge as IEnumerable<Book>);
+                   
+        }
     }
 }
 

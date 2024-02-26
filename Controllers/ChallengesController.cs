@@ -32,18 +32,19 @@ public class ChallengesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult> GetChallenge(string id)
+    public async Task<ActionResult> GetChallenge(int id)
     {
-         if (! await _repository.CheckChallengeExistsAsync(int.Parse(id)))
+         if (! await _repository.CheckChallengeExistsAsync(id))
          {
           _logger.LogInformation($"Challenge with id {id} not found");
            return NotFound();
          }
 
-         var challenge = await _repository.GetChallengeByIdAsync(int.Parse(id));
+         var challenge = await _repository.GetChallengeByIdAsync(id);
         
         return Ok(_mapper.Map<ChallengeWithoutBooksDto>(challenge));
     }
+
 
   // //add an HTTPPut fucntion for Challenge
   // public async Task<ActionResult> PutChallenge(string id)
