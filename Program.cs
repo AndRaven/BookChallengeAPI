@@ -1,3 +1,4 @@
+using BookChallengeAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,10 @@ builder.Services.AddSwaggerGen();
 //EF Core database context
 builder.Services.AddDbContext <ChallengeDbContext>(dbContextOptions => 
 dbContextOptions.UseSqlite(builder.Configuration.GetConnectionString("ChallengeDBConnectionString")));
+
+builder.Services.AddScoped<IChallengeRepository, ChallengeRepository>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
