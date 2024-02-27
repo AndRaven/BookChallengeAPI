@@ -32,7 +32,7 @@ public class BooksController : ControllerBase
 
          var challengeBook = await _repository.GetBooksForChallengeAsync(challengeId);
         
-        return Ok(_mapper.Map<BookDto>(challengeBook));
+        return Ok(_mapper.Map<IEnumerable<BookDto>>(challengeBook));
     }
     
 

@@ -1,4 +1,7 @@
 
+using System.ComponentModel.DataAnnotations.Schema;
+
+[NotMapped]
 public class ChallengeDto
 {
     public int Id { get; set; }

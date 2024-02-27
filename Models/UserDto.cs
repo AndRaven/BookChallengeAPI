@@ -1,5 +1,7 @@
 
+using System.ComponentModel.DataAnnotations.Schema;
 
+[NotMapped]
 public class UserDto 
 {
     public int Id { get; set; }

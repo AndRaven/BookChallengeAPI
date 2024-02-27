@@ -20,6 +20,8 @@ public class ChallengeDbContext : DbContext
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+
+
     modelBuilder.Entity<Challenge>().HasData(
       new Challenge { Id = 1, Name = "summer reading", Description = "Read books set in summer", NoOfBooks = 5, NoOfUsers = 0 },
       new Challenge { Id = 2, Name = "autumn reading", Description = "Read books set in autumn", NoOfBooks = 5, NoOfUsers = 0 }
@@ -36,7 +38,7 @@ public class ChallengeDbContext : DbContext
         Genre = "Classic",
         Year = 1925,
         Language = "English",
-        Pages = "180"
+        Pages = 180
       },
 
       new Book
@@ -49,7 +51,7 @@ public class ChallengeDbContext : DbContext
         Genre = "Fiction",
         Year = 2001,
         Language = "English",
-        Pages = "302"
+        Pages = 302
       },
 
       new Book
@@ -62,7 +64,7 @@ public class ChallengeDbContext : DbContext
         Genre = "Fiction",
         Year = 2014,
         Language = "English",
-        Pages = "292"
+        Pages = 292
       },
 
       new Book
@@ -75,7 +77,7 @@ public class ChallengeDbContext : DbContext
         Genre = "Fiction",
         Year = 2011,
         Language = "English",
-        Pages = "506"
+        Pages = 506
       },
 
       new Book
@@ -88,7 +90,7 @@ public class ChallengeDbContext : DbContext
         Genre = "Classic",
         Year = 1992,
         Language = "English",
-        Pages = "559"
+        Pages = 559
       });
 
     modelBuilder.Entity<ChallengeBook>().HasKey(cb => new { cb.BookId, cb.ChallengeId });

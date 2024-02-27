@@ -77,6 +77,7 @@ namespace BookChallengeAPI.Data
         {
             var booksInChallenge =  _context.ChallengeBooks
                    .Join(_context.Books, chBook => chBook.BookId, book => book.Id, (chBook, book) => new { ChallengeBook = chBook, Book = book })
+                   .Where(combined => combined.ChallengeBook.ChallengeId == challengeId)
                    .OrderBy( combined => combined.Book.Id)
                    .Select(combined  => combined.Book).ToList();
 
