@@ -30,9 +30,9 @@ public class BooksController : ControllerBase
            return NotFound();
          }
 
-         var challengeBook = await _repository.GetBooksForChallengeAsync(challengeId);
+         var challengeBooks = await _repository.GetBooksForChallengeAsync(challengeId);
         
-        return Ok(_mapper.Map<IEnumerable<BookDto>>(challengeBook));
+        return Ok(_mapper.Map<IEnumerable<BookDto>>(challengeBooks));
     }
     
 
