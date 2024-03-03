@@ -1,6 +1,8 @@
 public interface IBookService
 {
-    Task<Book> CreateBookAsync(string title, string author);
+    Book CreateBookAsync(string title, string author, string description, int year, int pages);
 
-    Task<Book> GetBookAsync(int bookId);
+    Task<Book> AddBookAsync(Book book);
+
+    Task<Book?> GetBookByIdAsync(int bookId);
 }

@@ -11,6 +11,14 @@ namespace BookChallengeAPI.Data
 
         Task<IEnumerable<Book>> GetBooksForChallengeAsync(int challengeId);
 
-        Task<Book?> GetBookByIdAsync(int challengeId, int bookId);
+        Task<Book?> GetBookByIdAsync(int bookId);
+
+        Task SaveChangesAsync();
+
+        Task AddBookAsync(Book book);
+
+        Task AddBookToChallengeAsync(int challengeId, Book book);
+
+        Task RemoveBookFromChallengeAsync(int challengeId, Book book);
     }
 }

@@ -68,23 +68,47 @@ namespace BookChallengeAPI.Data
             return await _context.Challenges.Where(ch => ch.Id == challengeId).AnyAsync();
         }
 
-        public Task<Book?> GetBookByIdAsync(int challengeId, int bookId)
+        public async Task<Book?> GetBookByIdAsync(int bookId)
         {
-            throw new NotImplementedException();
+            return await _context.Books.Where(b => b.Id == bookId).FirstOrDefaultAsync();
         }
 
         public Task<IEnumerable<Book>> GetBooksForChallengeAsync(int challengeId)
         {
-            var booksInChallenge =  _context.ChallengeBooks
+            var booksInChallenge = _context.ChallengeBooks
                    .Join(_context.Books, chBook => chBook.BookId, book => book.Id, (chBook, book) => new { ChallengeBook = chBook, Book = book })
                    .Where(combined => combined.ChallengeBook.ChallengeId == challengeId)
-                   .OrderBy( combined => combined.Book.Id)
-                   .Select(combined  => combined.Book).ToList();
+                   .OrderBy(combined => combined.Book.Id)
+                   .Select(combined => combined.Book).ToList();
 
             return Task.FromResult(booksInChallenge as IEnumerable<Book>);
-                   
+
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddBookAsync(Book book)
+        {
+            _context.Books.Add(book);
+        }
+
+        public async Task AddBookToChallengeAsync(int challengeId, Book book)
+        {
+             _context.ChallengeBooks.Add(new ChallengeBook { ChallengeId = challengeId, BookId = book.Id });
+        }
+
+        public async Task RemoveBookFromChallengeAsync(int challengeId, Book book)
+        {
+            _context.ChallengeBooks.Remove(new ChallengeBook { ChallengeId = challengeId, BookId = book.Id });
+        }
+
+
     }
 }
+
+
 
 

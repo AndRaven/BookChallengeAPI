@@ -35,8 +35,8 @@ namespace BookChallenge.Test;
 
         _controller = new BooksController(_challengeRepoMock.Object, _loggerMock.Object, _mapperMock.Object);
 
-       _books.Add(new Book() { Id = 1, Title = "Book1", Author = "Author1", Description = "Description1" });
-       _books.Add(new Book() { Id = 2, Title = "Book2", Author = "Author2", Description = "Description2" });
+       _books.Add(new Book("Book1", "Author1") { Id = 1,  Description = "Description1" });
+       _books.Add(new Book("Book2", "Author2") { Id = 2,  Description = "Description2" });
     }
     
     [OneTimeTearDown]
