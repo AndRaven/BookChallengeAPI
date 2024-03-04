@@ -29,7 +29,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext <ChallengeDbContext>(dbContextOptions => 
 dbContextOptions.UseSqlite(builder.Configuration.GetConnectionString("ChallengeDBConnectionString")));
 
+builder.Services.AddSingleton<BooksFactory>();
+
 builder.Services.AddScoped<IChallengeRepository, ChallengeRepository>();
+builder.Services.AddScoped<IChallengeService, ChallengeService>();
+builder.Services.AddScoped<IBookService, BookService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

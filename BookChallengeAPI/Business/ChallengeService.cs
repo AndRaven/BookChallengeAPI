@@ -1,7 +1,7 @@
 
 using BookChallengeAPI.Data;
 
-public class ChallengService : IChallengeService
+public class ChallengeService : IChallengeService
 {
     private readonly IChallengeRepository _challengeRepository;
     private readonly IBookService _bookService;
