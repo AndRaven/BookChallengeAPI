@@ -36,13 +36,15 @@ public class ChallengeService : IChallengeService
 
     public async Task AddBookToChallengeAsync(int challengeId, Book book)
     {
-        //check book does not already belong to the challenge
+        //check book does not already belong to the challeng
         var booksInChallenge = await GetBooksForChallengeAsync(challengeId);
 
         if (!booksInChallenge.Contains(book))
         {
             //add book to the challenge
-           await  _challengeRepository.AddBookToChallengeAsync(challengeId, book);
+            _challengeRepository.AddBookToChallengeAsync(challengeId, book);
+            
+            await _challengeRepository.SaveChangesAsync();
         }
     }
 
@@ -53,7 +55,8 @@ public class ChallengeService : IChallengeService
 
         if (booksInChallenge.Contains(book))
         {
-            await _challengeRepository.RemoveBookFromChallengeAsync(challengeId, book);
+             _challengeRepository.RemoveBookFromChallengeAsync(challengeId, book);
+             await _challengeRepository.SaveChangesAsync();
         }
     }
 

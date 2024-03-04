@@ -14,6 +14,9 @@ public class BookService : IBookService
 
     public Book CreateBookAsync(string title, string author, string description, int year, int pages)
     {
+        //add logic to check that book title and author does not already exist in the database
+        //if it does, throw an exception
+        
         var book = _booksFactory.CreateBook(title, author, description, year, pages);
 
         return book; 
@@ -21,7 +24,7 @@ public class BookService : IBookService
 
     public async Task AddBookAsync(Book book)
     {
-        await _challengeRepository.AddBookAsync(book);
+         _challengeRepository.AddBookAsync(book);
 
         await _challengeRepository.SaveChangesAsync();
     }
@@ -31,13 +34,8 @@ public class BookService : IBookService
         return await _challengeRepository.GetBookByIdAsync(bookId);
     }
 
-    Book IBookService.CreateBookAsync(string title, string author, string description, int year, int pages)
+    public async Task<bool> CheckIfBookExistsAsync(int bookId)
     {
-        throw new NotImplementedException();
-    }
-
-    Task<Book> IBookService.AddBookAsync(Book book)
-    {
-        throw new NotImplementedException();
+        return await _challengeRepository.CheckBookExistsAsync(bookId);
     }
 }

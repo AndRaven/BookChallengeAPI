@@ -68,6 +68,11 @@ namespace BookChallengeAPI.Data
             return await _context.Challenges.Where(ch => ch.Id == challengeId).AnyAsync();
         }
 
+        public async Task<bool> CheckBookExistsAsync(int bookId)
+        {
+            return await _context.Books.Where(b => b.Id == bookId).AnyAsync();
+        }
+
         public async Task<Book?> GetBookByIdAsync(int bookId)
         {
             return await _context.Books.Where(b => b.Id == bookId).FirstOrDefaultAsync();
@@ -90,22 +95,22 @@ namespace BookChallengeAPI.Data
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddBookAsync(Book book)
+        public void AddBookAsync(Book book)
         {
             _context.Books.Add(book);
         }
 
-        public async Task AddBookToChallengeAsync(int challengeId, Book book)
+        public void AddBookToChallengeAsync(int challengeId, Book book)
         {
              _context.ChallengeBooks.Add(new ChallengeBook { ChallengeId = challengeId, BookId = book.Id });
         }
 
-        public async Task RemoveBookFromChallengeAsync(int challengeId, Book book)
+        public void RemoveBookFromChallengeAsync(int challengeId, Book book)
         {
             _context.ChallengeBooks.Remove(new ChallengeBook { ChallengeId = challengeId, BookId = book.Id });
         }
 
-
+        
     }
 }
 

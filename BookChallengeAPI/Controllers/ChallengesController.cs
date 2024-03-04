@@ -29,16 +29,16 @@ public class ChallengesController : ControllerBase
        return Ok(_mapper.Map<IEnumerable<ChallengeDto>>(challengeEntities));
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult> GetChallenge(int id)
+    [HttpGet("{challengeId}")]
+    public async Task<ActionResult> GetChallenge(int challengeId)
     {
-         if (! await _challengeService.ChallengeExistsAsync(id))
+         if (! await _challengeService.ChallengeExistsAsync(challengeId))
          {
-          _logger.LogInformation($"Challenge with id {id} not found");
+          _logger.LogInformation($"Challenge with id {challengeId} not found");
            return NotFound();
          }
 
-         var challenge = await _challengeService.GetChallengeByIdAsync(id);
+         var challenge = await _challengeService.GetChallengeByIdAsync(challengeId);
         
         return Ok(_mapper.Map<ChallengeWithoutBooksDto>(challenge));
     }
