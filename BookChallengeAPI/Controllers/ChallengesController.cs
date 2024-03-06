@@ -11,36 +11,34 @@ public class ChallengesController : ControllerBase
 {
 
   private readonly ILogger<ChallengesController> _logger;
-  private readonly IChallengeRepository _repository;
+  private readonly IChallengeService _challengeService;
 
   private readonly IMapper _mapper;
-    public ChallengesController(IChallengeRepository repository, IMapper mapper, ILogger<ChallengesController> logger)
+    public ChallengesController(IChallengeService challengeService, IMapper mapper, ILogger<ChallengesController> logger)
     {
-
-      _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+      _challengeService = challengeService ?? throw new ArgumentNullException(nameof(challengeService));
       _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
       _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
-    }
+    } 
 
     [HttpGet]
     public async Task<ActionResult> GetChallenges()
     {
-       var challengeEntities = await _repository.GetChallengesAsync();
+       var challengeEntities = await _challengeService.GetChallengesAsync();
        
        return Ok(_mapper.Map<IEnumerable<ChallengeDto>>(challengeEntities));
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult> GetChallenge(int id)
+    [HttpGet("{challengeId}")]
+    public async Task<ActionResult> GetChallenge(int challengeId)
     {
-         if (! await _repository.CheckChallengeExistsAsync(id))
+         if (! await _challengeService.ChallengeExistsAsync(challengeId))
          {
-          _logger.LogInformation($"Challenge with id {id} not found");
+          _logger.LogInformation($"Challenge with id {challengeId} not found");
            return NotFound();
          }
 
-         var challenge = await _repository.GetChallengeByIdAsync(id);
+         var challenge = await _challengeService.GetChallengeByIdAsync(challengeId);
         
         return Ok(_mapper.Map<ChallengeWithoutBooksDto>(challenge));
     }

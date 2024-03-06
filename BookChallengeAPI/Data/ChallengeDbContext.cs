@@ -28,11 +28,9 @@ public class ChallengeDbContext : DbContext
     );
 
     modelBuilder.Entity<Book>().HasData(
-      new Book
+      new Book("The Great Gatsby", "F. Scott Fitzgerald")
       {
         Id = 1,
-        Title = "The Great Gatsby",
-        Author = "F. Scott Fitzgerald",
         Description = "Set in the summer of 1922 on Long Island and in New York City, this classic novel captures the essence of the Jazz Age with its lavish parties, love affairs, and societal commentary.",
         Url = "https://www.goodreads.com/book/show/4671.The_Great_Gatsby",
         Genre = "Classic",
@@ -41,11 +39,9 @@ public class ChallengeDbContext : DbContext
         Pages = 180
       },
 
-      new Book
+      new Book("The Secret Life of Bees", "Sue Monk Kidd")
       {
         Id = 2,
-        Title = "The Secret Life of Bees",
-        Author = "Sue Monk Kidd",
         Description = "Set in South Carolina during the summer of 1964, this novel follows a young girl named Lily Owens as she embarks on a journey to uncover the truth about her mother's past and finds solace and healing in the company of beekeeping sisters.",
         Url = "https://www.goodreads.com/book/show/37435.The_Secret_Life_of_Bees",
         Genre = "Fiction",
@@ -54,11 +50,9 @@ public class ChallengeDbContext : DbContext
         Pages = 302
       },
 
-      new Book
+      new Book("The Vacationers", "Emma Straub")
       {
         Id = 3,
-        Title = "The Vacationers",
-        Author = "Emma Straub",
         Description = "This novel takes place during a two-week family vacation in Mallorca, Spain, where secrets and tensions bubble to the surface as the Post family navigates love, betrayal, and redemption.",
         Url = "https://www.goodreads.com/book/show/18641982-the-vacationers",
         Genre = "Fiction",
@@ -67,11 +61,9 @@ public class ChallengeDbContext : DbContext
         Pages = 292
       },
 
-      new Book
+      new Book("The Night Circus", "Erin Morgenstern")
       {
         Id = 4,
-        Title = "The Night Circus",
-        Author = "Erin Morgenstern",
         Description = "This enchanting novel follows the mysterious Le Cirque des Rêves, a circus that arrives without warning and is only open at night. The story unfolds over many years, capturing the magic and romance of autumn.",
         Url = "https://www.goodreads.com/book/show/9361589-the-night-circus",
         Genre = "Fiction",
@@ -80,11 +72,9 @@ public class ChallengeDbContext : DbContext
         Pages = 506
       },
 
-      new Book
+      new Book("The Secret History", "Donna Tartt")
       {
         Id = 5,
-        Title = "The Secret History",
-        Author = "Donna Tartt",
         Description = "This atmospheric novel is set in a New England college town during the fall semester. It follows a group of eccentric classics students who become entangled in a dark and sinister secret.",
         Url = "https://www.goodreads.com/book/show/29044.The_Secret_History",
         Genre = "Classic",

@@ -9,13 +9,21 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/bin/Debug/net7.0/BookChallengeAPI.dll",
+      "program": "${workspaceFolder}/BookChallengeAPI/bin/Debug/net7.0/BookChallengeAPI.dll",
       "args": [],
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/BookChallengeAPI",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "launchBrowser": {
+        "enabled": true,
+        "args": "${auto-detect-url}/swagger",
+        "windows": {
+          "command": "cmd.exe",
+          "args": "/C start ${auto-detect-url}/swagger"
+        }
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -28,6 +36,15 @@
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach"
+    },
+    {
+      "name": "Docker .NET Launch",
+      "type": "docker",
+      "request": "launch",
+      "preLaunchTask": "docker-run: debug",
+      "netCore": {
+        "appProject": "${workspaceFolder}/BookChallengeAPI/BookChallengeAPI.csproj"
+      }
     }
   ]
 }
