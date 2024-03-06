@@ -5,13 +5,22 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Docker .NET Attach (Preview)",
+      "type": "docker",
+      "request": "attach",
+      "platform": "netCore",
+      "sourceFileMap": {
+        "/src": "${workspaceFolder}/src"
+      }
+    },
+    {
       "name": ".NET Core Launch (web)",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/BookChallengeAPI/bin/Debug/net7.0/BookChallengeAPI.dll",
+      "program": "${workspaceFolder}/src/BookChallengeAPI/bin/Debug/net7.0/BookChallengeAPI.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/BookChallengeAPI",
+      "cwd": "${workspaceFolder}/src/BookChallengeAPI",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",
@@ -29,7 +38,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
+        "/Views": "${workspaceFolder}/src/Views"
       }
     },
     {
@@ -43,7 +52,7 @@
       "request": "launch",
       "preLaunchTask": "docker-run: debug",
       "netCore": {
-        "appProject": "${workspaceFolder}/BookChallengeAPI/BookChallengeAPI.csproj"
+        "appProject": "${workspaceFolder}/src/BookChallengeAPI/BookChallengeAPI.csproj"
       }
     }
   ]
