@@ -3,13 +3,10 @@ WORKDIR /app
 EXPOSE 8088
 EXPOSE 7049
 
-ENV ASPNETCORE_URLS=http://+:8088,https://+:7049
-
-
 #Creates a non-root user with an explicit UID and adds permission to access the /app folder
 #For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
+#RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+#USER appuser
 
 WORKDIR /app
 
@@ -28,4 +25,6 @@ RUN dotnet publish "BookChallengeAPI.csproj" -c $configuration -o /app/publish /
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS=http://+:8088,https://+:7049
+
 ENTRYPOINT ["dotnet", "BookChallengeAPI.dll"]
