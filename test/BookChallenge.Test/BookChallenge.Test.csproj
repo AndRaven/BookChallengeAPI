@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookChallengeAPI\BookChallengeAPI.csproj" />
+    <ProjectReference Include="..\..\src\BookChallengeAPI\BookChallengeAPI.csproj" />
   </ItemGroup>
 
 </Project>
